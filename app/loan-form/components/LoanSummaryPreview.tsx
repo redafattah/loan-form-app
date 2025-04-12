@@ -51,8 +51,14 @@ export default function LoanSummaryPreview() {
     { label: 'Téléphone', value: data.phone, icon: Phone },
   ];
 
+  const isDataComplete =
+    !!data.nom?.trim() &&
+    !!data.email?.trim() &&
+    data.amount > 0 &&
+    data.duration > 0;
+
   return (
-    <div className="w-[500px]  bg-white border-l  flex flex-col overflow-hidden">
+    <div className="w-full max-w-md bg-white border-l flex flex-col">
       {/* Header */}
       <div className="text-center px-6 pt-6">
         <h2 className="text-lg font-bold text-zinc-800 mb-1">
@@ -63,11 +69,11 @@ export default function LoanSummaryPreview() {
         </p>
       </div>
 
-      {/* Scrollable content */}
-      <div className=" overflow-y-scroll h-[600px] px-6 pb-4">
-        <ul className="space-y-4 grid">
+      {/* Scrollable fields */}
+      <div className="flex-1 overflow-y-auto h-[500px] px-6 pb-4">
+        <ul className="space-y-4">
           {fields.map((field, i) => (
-            <li key={i} className="flex items-start border p-2 gap-3">
+            <li key={i} className="flex items-start border p-2 gap-3 rounded">
               <field.icon className="w-5 h-5 text-zinc-400 mt-0.5" />
               <div className="flex-1">
                 <p className="text-xs text-zinc-500">{field.label}</p>
@@ -80,15 +86,12 @@ export default function LoanSummaryPreview() {
         </ul>
       </div>
 
-
-     {/* Floating footer */}
-<div className="bottom-0 left-0 w-full bg-white border-t border-zinc-200 px-6 py-4">
-  <div className="flex justify-center">
-    {data.nom && data.email && data.amount > 0 && data.duration > 0 && (
-      <DownloadRecapPDF data={data} />
-    )}
-  </div>
-</div>
+      {/* Download PDF footer */}
+      <div className="w-full border-t border-zinc-200 px-6 py-4">
+        <div className="flex justify-center">
+          {isDataComplete && <DownloadRecapPDF data={data} />}
+        </div>
+      </div>
     </div>
   );
 }
