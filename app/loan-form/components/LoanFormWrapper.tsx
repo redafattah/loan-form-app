@@ -203,7 +203,7 @@ const LoanFormWrapper = forwardRef<LoanFormHandle>((_, ref) => {
       <div className="flex flex-col lg:flex-row gap-6 w-full">
         {/* Form Section */}
         <div className="w-full lg:w-2/3 border-l border-gray-200">
-          <div className="bg-white border-b px-4 sm:px-8 lg:px-12 py-6 mb-6">
+          <div className="bg-white border-b px-4 sm:flex hidden sm:px-8 lg:px-12 py-6 mb-6">
             <Stepper activeStep={activeStep}>
               {steps.map((label) => (
                 <Step key={label}>
@@ -213,7 +213,7 @@ const LoanFormWrapper = forwardRef<LoanFormHandle>((_, ref) => {
             </Stepper>
           </div>
 
-          <div className="px-4 sm:px-8 lg:px-12">
+          <div className="px-4 sm:px-8  mt-4 lg:px-12">
             <form onSubmit={(e) => e.preventDefault()} className="pb-10">
               <div className="mb-8">
                 <Typography variant="h6" fontWeight="bold">
@@ -259,7 +259,7 @@ const LoanFormWrapper = forwardRef<LoanFormHandle>((_, ref) => {
         </div>
 
         {/* Summary Section */}
-        <div className="w-full lg:w-1/3 px-4 sm:px-8 lg:px-0 flex">
+        <div className="w-full  lg:w-1/3 px-4 sm:px-8 lg:px-0 flex">
           <LoanSummaryPreview />
         </div>
       </div>
