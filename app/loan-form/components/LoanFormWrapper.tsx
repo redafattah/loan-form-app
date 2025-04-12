@@ -24,6 +24,7 @@ import LoanSummaryPreview from './LoanSummaryPreview';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/lib/supabaseClient';
+import LoanFormSkeleton from '@/components/LoanFormSkeleton';
 
 export type LoanFormHandle = {
   getSubmittedData: () => LoanFormData | null;
@@ -111,10 +112,16 @@ const LoanFormWrapper = forwardRef<LoanFormHandle>((_, ref) => {
   };
 
   const onNext = async () => {
+
     const isValid = await methods.trigger(getFieldsForStep(activeStep));
     if (!isValid) return;
-    setActiveStep((prev) => prev + 1);
+    setLoadingStep(true);
+    setTimeout(() => {
+      setActiveStep((prev) => prev + 1);
+      setLoadingStep(false);
+    }, 300); // slight delay for smoother UX
   };
+  
 
   const onBack = () => setActiveStep((prev) => prev - 1);
 
@@ -190,6 +197,7 @@ const LoanFormWrapper = forwardRef<LoanFormHandle>((_, ref) => {
       setIsSubmitting(false);
     }
   };
+  const [loadingStep, setLoadingStep] = useState(false);
 
   const stepComponents = [
     <SimulationStep key="simulation" />,
@@ -223,7 +231,8 @@ const LoanFormWrapper = forwardRef<LoanFormHandle>((_, ref) => {
                   {stepTitles[activeStep].description}
                 </Typography>
               </div>
-              {stepComponents[activeStep]}
+              {loadingStep ? <LoanFormSkeleton />: stepComponents[activeStep]}
+          
             </form>
           </div>
 
