@@ -58,7 +58,7 @@ export default function LoanSummaryPreview() {
     data.duration > 0;
 
   return (
-    <div className="w-full h-[800px]  max-w-md bg-white border-l flex flex-col">
+    <div className="w-full h-[600px]  max-w-md bg-white border-l flex flex-col">
       {/* Header */}
       <div className="text-center px-6 pt-6">
         <h2 className="text-lg font-bold text-zinc-800 mb-1">
