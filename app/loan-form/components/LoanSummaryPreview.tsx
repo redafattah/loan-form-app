@@ -58,7 +58,7 @@ export default function LoanSummaryPreview() {
     data.duration > 0;
 
   return (
-    <div className="w-full max-w-md bg-white border-l flex flex-col">
+    <div className="w-full h-[800px]  max-w-md bg-white border-l flex flex-col">
       {/* Header */}
       <div className="text-center px-6 pt-6">
         <h2 className="text-lg font-bold text-zinc-800 mb-1">
@@ -70,7 +70,7 @@ export default function LoanSummaryPreview() {
       </div>
 
       {/* Scrollable fields */}
-      <div className="flex-1 overflow-y-auto h-[500px] px-6 pb-4">
+      <div className="flex-1   overflow-scroll h-[500px] px-6 pb-4">
         <ul className="space-y-4">
           {fields.map((field, i) => (
             <li key={i} className="flex items-start border p-2 gap-3 rounded">
